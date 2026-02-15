@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMES | Eleven Industrial AI-based Manufacturing Execution System</title>
+    <meta name="description" content="AIMES는 11개 산업 도메인(식품, 제약, 화학, 반도체, 자동차, 배터리, 금속, 의료기기, 화장품, 농수산물, 섬유)에 걸쳐 AI/ML 기반의 예측적 품질관리와 공정 최적화를 구현하는 차세대 제조실행시스템입니다.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230ea5e9'/%3E%3Ctext x='50' y='58' font-size='22' font-weight='bold' text-anchor='middle' fill='white'%3E11%3C/text%3E%3C/svg%3E">
+
+    <!-- CDNs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 3D Canvas Background -->
+    <div id="canvas-container"></div>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="brand-accent">AI</span>MES
+                <span class="brand-eleven">ELEVEN</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#domains" data-i18n="nav_domains">산업 도메인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#architecture" data-i18n="nav_arch">아키텍처</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#techstack" data-i18n="nav_stack">기술 스택</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#workflow" data-i18n="nav_workflow">워크플로우</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ai-pipeline" data-i18n="nav_ai">AI/ML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#security" data-i18n="nav_security">보안</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#comparison" data-i18n="nav_compare">비교 매트릭스</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#roi" data-i18n="nav_roi">ROI</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <div class="lang-toggle">
+                            <button class="lang-btn active" data-lang="ko">KR</button>
+                            <button class="lang-btn" data-lang="en">EN</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== Hero Section ==================== -->
+    <section class="hero-section" id="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 content-fade-up">
+                    <div class="mb-3">
+                        <span class="section-tag section-tag-primary">A3 Security Co., Ltd.</span>
+                        <span class="section-tag section-tag-accent ms-2">A3-AI Working Group</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span data-i18n="hero_title_1">11개 산업을 아우르는</span><br>
+                        <span class="text-gradient" data-i18n="hero_title_2">AI 제조혁신 플랫폼</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="hero_subtitle">
+                        AIMES(AI-based Manufacturing Execution System)는 식품, 제약, 화학, 반도체, 자동차, 배터리, 금속, 의료기기, 화장품, 농수산물, 섬유 등 11개 제조 산업에 걸쳐 동일한 기술 스택과 아키텍처 위에 도메인별 특화 기능을 제공하는 차세대 통합 MES 플랫폼입니다.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#domains" class="btn-main" data-i18n="hero_btn_domains">11개 산업 살펴보기</a>
+                        <a href="#architecture" class="btn-outline-glow" data-i18n="hero_btn_arch">공통 아키텍처</a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="row mt-5 pt-3">
+                        <div class="col-3">
+                            <div class="stat-box">
+                                <div class="stat-number" data-count="11">0</div>
+                                <div class="stat-label" data-i18n="stat_domains">산업 도메인</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="stat-box">
+                                <div class="stat-number" data-count="100">0</div>
+                                <div class="stat-label" data-i18n="stat_services">+ 마이크로서비스</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="stat-box">
+                                <div class="stat-number" data-count="1100">0</div>
+                                <div class="stat-label" data-i18n="stat_api">+ API 엔드포인트</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="stat-box">
+                                <div class="stat-number" data-count="60">0</div>
+                                <div class="stat-label" data-i18n="stat_ai">+ AI/ML 모델</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right - Industry Ring -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="hero-industry-ring floating">
+                        <div class="ring-center">
+                            <div class="ring-center-icon"><i class="bi bi-cpu"></i></div>
+                            <div class="ring-center-label">AIMES<br><small style="font-weight:300; font-size:0.7rem; color:var(--text-muted);">Eleven Industries</small></div>
+                        </div>
+                        <!-- 11 industry icons positioned in a circle -->
+                        <div class="ring-item" style="top:5%; left:50%; transform:translate(-50%,0);" title="식품"><i class="bi bi-cup-hot"></i><span>Food</span></div>
+                        <div class="ring-item" style="top:12%; right:8%;" title="제약"><i class="bi bi-capsule"></i><span>Pharma</span></div>
+                        <div class="ring-item" style="top:35%; right:-2%;" title="화학"><i class="bi bi-droplet-half"></i><span>Chemical</span></div>
+                        <div class="ring-item" style="top:62%; right:2%;" title="반도체"><i class="bi bi-motherboard"></i><span>Semi</span></div>
+                        <div class="ring-item" style="bottom:8%; right:15%;" title="자동차"><i class="bi bi-car-front"></i><span>Auto</span></div>
+                        <div class="ring-item" style="bottom:0%; left:50%; transform:translate(-50%,0);" title="배터리"><i class="bi bi-battery-charging"></i><span>Battery</span></div>
+                        <div class="ring-item" style="bottom:8%; left:15%;" title="금속"><i class="bi bi-hammer"></i><span>Metal</span></div>
+                        <div class="ring-item" style="top:62%; left:2%;" title="의료기기"><i class="bi bi-heart-pulse"></i><span>Medical</span></div>
+                        <div class="ring-item" style="top:35%; left:-2%;" title="화장품"><i class="bi bi-stars"></i><span>Cosmetics</span></div>
+                        <div class="ring-item" style="top:12%; left:8%;" title="농수산물"><i class="bi bi-flower1"></i><span>Agri</span></div>
+                        <div class="ring-item" style="top:0%; left:25%;" title="섬유"><i class="bi bi-palette2"></i><span>Textile</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <i class="bi bi-chevron-double-down text-muted" style="font-size: 1.5rem;"></i>
+        </div>
+    </section>
+
+    <!-- ==================== Platform Overview ==================== -->
+    <section class="section py-5" id="overview">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-primary" data-i18n="ov_tag">PLATFORM OVERVIEW</span>
+                <h2 class="section-title" data-i18n="ov_title">하나의 플랫폼, 11개 산업</h2>
+                <p class="section-desc" data-i18n="ov_desc">AIMES는 공통 기술 기반(React + FastAPI + PostgreSQL) 위에 산업별 특화 서비스를 플러그인 방식으로 확장합니다. 동일한 아키텍처, 동일한 워크플로우, 동일한 AI/ML 파이프라인으로 11개 제조 산업의 AX 전환을 가속합니다.</p>
+            </div>
+
+            <div class="row g-4 fade-in">
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg mx-auto mb-3"><i class="bi bi-layers"></i></div>
+                        <h5 data-i18n="ov_arch_title">통합 아키텍처</h5>
+                        <p class="small text-muted" data-i18n="ov_arch_desc">ISA-95 기반 8계층 아키텍처로 OT/IT 분리. 마이크로서비스 기반의 유연한 모듈 구성</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
+                            <span class="feature-tag">8-Layer Architecture</span>
+                            <span class="feature-tag">Microservices</span>
+                            <span class="feature-tag">Purdue Model</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg icon-box-accent mx-auto mb-3"><i class="bi bi-boxes"></i></div>
+                        <h5 data-i18n="ov_domain_title">도메인 특화</h5>
+                        <p class="small text-muted" data-i18n="ov_domain_desc">각 산업의 규제, 공정, 품질 기준에 맞춘 전용 서비스와 AI 모델을 제공합니다</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
+                            <span class="feature-tag feature-tag-purple">HACCP</span>
+                            <span class="feature-tag feature-tag-purple">GMP</span>
+                            <span class="feature-tag feature-tag-purple">IATF 16949</span>
+                            <span class="feature-tag feature-tag-purple">SECS/GEM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg icon-box-success mx-auto mb-3"><i class="bi bi-shield-check"></i></div>
+                        <h5 data-i18n="ov_sec_title">보안 내재화</h5>
+                        <p class="small text-muted" data-i18n="ov_sec_desc">A3 Security의 OT/IT 보안 전문성을 기반으로 Zero Trust 아키텍처를 모든 산업에 적용</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
+                            <span class="feature-tag feature-tag-green">Zero Trust</span>
+                            <span class="feature-tag feature-tag-green">On-Premises</span>
+                            <span class="feature-tag feature-tag-green">E2E Encryption</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 11 Industry Domains ==================== -->
+    <section class="section py-5 bg-dim position-relative" id="domains">
+        <div class="glow-bg glow-bg-accent"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-accent" data-i18n="dom_tag">11 INDUSTRIAL DOMAINS</span>
+                <h2 class="section-title">
+                    <span class="text-gradient" data-i18n="dom_title">11개 산업 도메인</span>
+                </h2>
+                <p class="section-desc" data-i18n="dom_desc">각 산업의 규제 요건과 공정 특성에 최적화된 AIMES를 제공합니다. 카드를 클릭하여 상세 정보를 확인하세요.</p>
+            </div>
+
+            <div class="domain-grid fade-in">
+
+                <!-- 1. Food Manufacturing -->
+                <div class="domain-card" data-domain="food">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(14,165,233,0.1); color:var(--primary); border:1px solid rgba(14,165,233,0.2);">
+                            <i class="bi bi-cup-hot"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_food_title">식품 제조</h4>
+                            <div class="domain-subtitle" data-i18n="dom_food_sub">Food Manufacturing (KSIC 10/11)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_food_desc">HACCP CCP 모니터링, 레시피 최적화, 콜드체인 관리, 이력추적(LOT) 등 식품 안전과 품질을 AI로 혁신합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag">Production</span>
+                        <span class="feature-tag">Quality</span>
+                        <span class="feature-tag">HACCP</span>
+                        <span class="feature-tag">Traceability</span>
+                        <span class="feature-tag">Inventory</span>
+                        <span class="feature-tag">Maintenance</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">HACCP</span>
+                        <span class="regulation-badge">MFDS</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>HACCP CCP 실시간 모니터링 및 자동 기록</li>
+                            <li>AI 기반 품질 예측 (불량률 40~60% 감소)</li>
+                            <li>원료 배합비 자동 최적화</li>
+                            <li>알레르겐 추적 및 리콜 관리</li>
+                            <li>콜드체인 온도 모니터링</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>품질 예측 (LSTM/XGBoost)</li>
+                            <li>이상 탐지 (Isolation Forest)</li>
+                            <li>공정 최적화 (RL/Bayesian)</li>
+                            <li>비전 검사 (YOLOv8)</li>
+                            <li>수요 예측 (Prophet)</li>
+                            <li>설비 RUL 예측</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. Pharmaceutical -->
+                <div class="domain-card" data-domain="pharma">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(139,92,246,0.1); color:var(--accent); border:1px solid rgba(139,92,246,0.2);">
+                            <i class="bi bi-capsule"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_pharma_title">제약/의약품</h4>
+                            <div class="domain-subtitle" data-i18n="dom_pharma_sub">Pharmaceutical (GMP)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_pharma_desc">FDA 21 CFR Part 11 전자배치기록, GMP 일탈관리, 콜드체인 4존 모니터링, 시리얼라이제이션으로 의약품 무결성을 보장합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-purple">GMP Compliance</span>
+                        <span class="feature-tag feature-tag-purple">Batch Record</span>
+                        <span class="feature-tag feature-tag-purple">Quality</span>
+                        <span class="feature-tag feature-tag-purple">Cold Chain</span>
+                        <span class="feature-tag feature-tag-purple">Serialization</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">21 CFR Part 11</span>
+                        <span class="regulation-badge">ICH Q1A</span>
+                        <span class="regulation-badge">DSCSA</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>전자배치기록(EBR) + e-Signature (ALCOA+ 준수)</li>
+                            <li>GMP 일탈/CAPA/변경관리</li>
+                            <li>안정성 시험 (ICH Q1A)</li>
+                            <li>콜드체인 4존 MKT 계산 및 이탈 감지</li>
+                            <li>DSCSA 시리얼라이제이션</li>
+                            <li>설비 IQ/OQ/PQ 밸리데이션</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>수율 최적화 (Yield Optimization)</li>
+                            <li>이상 탐지 (Anomaly Detection)</li>
+                            <li>일탈 예측 (Deviation Prediction)</li>
+                            <li>설비 RUL 예측</li>
+                            <li>비전 검사</li>
+                            <li>PAT (Process Analytical Technology)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. Chemical -->
+                <div class="domain-card" data-domain="chemical">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(245,158,11,0.1); color:var(--warning); border:1px solid rgba(245,158,11,0.2);">
+                            <i class="bi bi-droplet-half"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_chem_title">화학제품</h4>
+                            <div class="domain-subtitle" data-i18n="dom_chem_sub">Chemical Manufacturing (PSM)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_chem_desc">공정안전관리(PSM), K-REACH 화학물질 등록, 가스누출 감지, 탄소배출 관리, ESG 보고까지 화학공정의 안전과 환경을 통합관리합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-amber">PSM</span>
+                        <span class="feature-tag feature-tag-amber">Reaction</span>
+                        <span class="feature-tag feature-tag-amber">Chemical Safety</span>
+                        <span class="feature-tag feature-tag-amber">Environment</span>
+                        <span class="feature-tag feature-tag-amber">Quality</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">K-REACH</span>
+                        <span class="regulation-badge">GHS/MSDS</span>
+                        <span class="regulation-badge">PSM</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>PSM: HAZOP 분석, SIL 장치 관리, 비상대응 계획</li>
+                            <li>K-REACH 화학물질 등록 및 CAS 번호 관리</li>
+                            <li>MSDS/GHS 라벨링</li>
+                            <li>가스누출 감지: 실시간 LEL 모니터링</li>
+                            <li>대기/수질 배출: NOx, SOx, VOC, COD, BOD</li>
+                            <li>탄소 관리: Scope 1/2/3 + ETS 거래</li>
+                            <li>RBI: 리스크 기반 검사 + 부식 분석</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>반응 온도/압력 최적화</li>
+                            <li>가스누출 패턴 예측</li>
+                            <li>SPC 품질 관리 (Cp/Cpk)</li>
+                            <li>에너지 소비 최적화</li>
+                            <li>부식률 예측</li>
+                            <li>설비 RUL 예측</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. Electronics/Semiconductor -->
+                <div class="domain-card" data-domain="electronics">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(244,114,182,0.1); color:var(--companion); border:1px solid rgba(244,114,182,0.2);">
+                            <i class="bi bi-motherboard"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_elec_title">반도체/전자</h4>
+                            <div class="domain-subtitle" data-i18n="dom_elec_sub">Semiconductor & Electronics (SECS/GEM)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_elec_desc">Lot/Wafer 추적, AOI 비전검사, SPC, FDC/APC 고급 공정제어, SECS/GEM 장비 인터페이스, 클린룸 모니터링을 구현합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-pink">Yield</span>
+                        <span class="feature-tag feature-tag-pink">Recipe</span>
+                        <span class="feature-tag feature-tag-pink">AOI/SPC</span>
+                        <span class="feature-tag feature-tag-pink">FDC/APC</span>
+                        <span class="feature-tag feature-tag-pink">SECS/GEM</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">SEMI Standards</span>
+                        <span class="ai-badge">8 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>Lot/Wafer 라이프사이클 추적</li>
+                            <li>Wafer Map & Bin Sort (6 카테고리)</li>
+                            <li>레시피 버전 관리 + Golden Recipe 승인</li>
+                            <li>AOI 비전 검사: 결함 분류 및 심각도</li>
+                            <li>SPC 관리도 (Western Electric Rules)</li>
+                            <li>FDC: 다변량 결함 탐지</li>
+                            <li>APC: 공정 보정 적용/복원</li>
+                            <li>클린룸 모니터링: 온도/습도/파티클/차압</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>수율 예측 (Yield Prediction)</li>
+                            <li>결함 분류 (YOLOv8)</li>
+                            <li>가상 계측 (Virtual Metrology)</li>
+                            <li>공정 최적화 (APC)</li>
+                            <li>Probe Test 분석</li>
+                            <li>신뢰성 시험 분석</li>
+                            <li>설비 RUL 예측</li>
+                            <li>수요 예측</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. Automotive -->
+                <div class="domain-card" data-domain="automotive">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(16,185,129,0.1); color:var(--success); border:1px solid rgba(16,185,129,0.2);">
+                            <i class="bi bi-car-front"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_auto_title">자동차 부품</h4>
+                            <div class="domain-subtitle" data-i18n="dom_auto_sub">Automotive (IATF 16949)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_auto_desc">IATF 16949 품질표준 준수, 공정능력(Ppk/Cpk) 분석, FMEA 관리, VIN 추적, 금형/공구 수명관리를 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-green">Production</span>
+                        <span class="feature-tag feature-tag-green">IATF Compliance</span>
+                        <span class="feature-tag feature-tag-green">Tool Mgmt</span>
+                        <span class="feature-tag feature-tag-green">Traceability</span>
+                        <span class="feature-tag feature-tag-green">Quality</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">IATF 16949</span>
+                        <span class="regulation-badge">ISO 9001</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>IATF 16949 품질 시스템 통합</li>
+                            <li>공정능력 분석 (Ppk/Cpk)</li>
+                            <li>FMEA 리스크 관리</li>
+                            <li>VIN 기반 차량/부품 추적</li>
+                            <li>금형/공구 수명주기 관리</li>
+                            <li>프레스/조립 설비 예측정비</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. Battery -->
+                <div class="domain-card" data-domain="battery">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(14,165,233,0.1); color:var(--primary); border:1px solid rgba(14,165,233,0.2);">
+                            <i class="bi bi-battery-charging"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_bat_title">배터리/셀</h4>
+                            <div class="domain-subtitle" data-i18n="dom_bat_sub">Battery Cell & Pack (Li-ion)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_bat_desc">셀 ID 추적, 드라이룸 환경관리, 전극공정(코팅/건조/슬리팅), 화성/에이징, 용량/임피던스 테스트를 통합 관리합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag">Cell Tracking</span>
+                        <span class="feature-tag">Dryroom</span>
+                        <span class="feature-tag">Electrode</span>
+                        <span class="feature-tag">Formation</span>
+                        <span class="feature-tag">Quality</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">IEC 62619</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>Cell ID 라이프사이클 추적</li>
+                            <li>드라이룸 습도/온도/이슬점 모니터링</li>
+                            <li>전극공정: 코팅/건조/슬리팅 관리</li>
+                            <li>화성 & 에이징: 전압/용량 프로파일링</li>
+                            <li>셀 용량/임피던스/안전성 시험</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 7. Metal -->
+                <div class="domain-card" data-domain="metal">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(245,158,11,0.1); color:var(--warning); border:1px solid rgba(245,158,11,0.2);">
+                            <i class="bi bi-hammer"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_metal_title">금속/철강</h4>
+                            <div class="domain-subtitle" data-i18n="dom_metal_sub">Metal & Steel Manufacturing</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_metal_desc">용해/주조/압연/열처리 공정 추적, 합금 조성 모니터링, 인장강도/경도 시험, 부식률 예측, 금형관리를 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-amber">Production</span>
+                        <span class="feature-tag feature-tag-amber">Process Control</span>
+                        <span class="feature-tag feature-tag-amber">Quality</span>
+                        <span class="feature-tag feature-tag-amber">Safety</span>
+                        <span class="feature-tag feature-tag-amber">Tool/Mold</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">ISO 9001</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>용해/주조/압연/열처리 공정 추적</li>
+                            <li>합금 조성 실시간 모니터링</li>
+                            <li>인장강도/경도/표면 품질 시험</li>
+                            <li>RBI(리스크 기반 검사) + 부식률 분석</li>
+                            <li>금형/공구 수명관리</li>
+                            <li>안전관리: 위험물질 추적, 작업자 안전</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 8. Medical Device -->
+                <div class="domain-card" data-domain="medical">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(239,68,68,0.1); color:var(--danger); border:1px solid rgba(239,68,68,0.2);">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_med_title">의료기기</h4>
+                            <div class="domain-subtitle" data-i18n="dom_med_sub">Medical Device (FDA 510(k))</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_med_desc">FDA 510(k) 규제 준수, ISO 13485 품질시스템, 멸균 밸리데이션, 생체적합성 시험, 기기 시리얼 이력추적을 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">Production</span>
+                        <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">Regulatory</span>
+                        <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">Sterilization</span>
+                        <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">Traceability</span>
+                        <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">Quality</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">FDA 510(k)</span>
+                        <span class="regulation-badge">ISO 13485</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>FDA 510(k) 규제 문서 관리</li>
+                            <li>ISO 13485 품질경영시스템</li>
+                            <li>멸균 밸리데이션 (EO, Gamma, Steam)</li>
+                            <li>생체적합성 시험 관리</li>
+                            <li>기기 시리얼 추적 (구성품 → 완제품)</li>
+                            <li>설비 멸균 및 밸리데이션</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 9. Cosmetics -->
+                <div class="domain-card" data-domain="cosmetics">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(244,114,182,0.1); color:var(--companion); border:1px solid rgba(244,114,182,0.2);">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_cosm_title">화장품</h4>
+                            <div class="domain-subtitle" data-i18n="dom_cosm_sub">Cosmetics (CGMP / ISO 22716)</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_cosm_desc">CGMP/ISO 22716 규제 준수, 처방(INCI) 관리, EU 26종 알레르겐 추적, pH/점도/색차(ΔE) 품질관리, 다국가 인허가를 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-pink">CGMP</span>
+                        <span class="feature-tag feature-tag-pink">Formulation</span>
+                        <span class="feature-tag feature-tag-pink">Allergen</span>
+                        <span class="feature-tag feature-tag-pink">Regulatory</span>
+                        <span class="feature-tag feature-tag-pink">Quality</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">ISO 22716</span>
+                        <span class="regulation-badge">KFDA</span>
+                        <span class="regulation-badge">EU Reg</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>CGMP 문서관리/SOP, 일탈관리, 변경관리</li>
+                            <li>처방관리: INCI 코드 + CAS 번호</li>
+                            <li>EU 26종 알레르겐 추적 + 교차오염 관리</li>
+                            <li>품질: pH, 점도, 색차(ΔE), 미생물</li>
+                            <li>다국가 인허가 (KFDA/EU/FDA/ISO)</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>색상 매칭 비전 AI (94.6% 정확도)</li>
+                            <li>유화 안정성 예측</li>
+                            <li>점도 예측</li>
+                            <li>미생물 탐지</li>
+                            <li>수요 예측</li>
+                            <li>설비 RUL 예측</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 10. Agricultural -->
+                <div class="domain-card" data-domain="agricultural">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(16,185,129,0.1); color:var(--success); border:1px solid rgba(16,185,129,0.2);">
+                            <i class="bi bi-flower1"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_agri_title">농수산물 가공</h4>
+                            <div class="domain-subtitle" data-i18n="dom_agri_sub">Agricultural & Marine Products</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_agri_desc">스마트팜/양식장 IoT 연동, 콜드체인 5존 모니터링, 선도예측(Arrhenius), 등급판정 AI, HACCP 준수를 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-green">HACCP</span>
+                        <span class="feature-tag feature-tag-green">Cold Chain</span>
+                        <span class="feature-tag feature-tag-green">SmartFarm</span>
+                        <span class="feature-tag feature-tag-green">Quality</span>
+                        <span class="feature-tag feature-tag-green">Raw Material</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">HACCP</span>
+                        <span class="regulation-badge">GAP</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>스마트팜/양식장 IoT 센서 통합 (MQTT)</li>
+                            <li>콜드체인 5존 온도 모니터링 + MKT 계산</li>
+                            <li>HACCP CCP 자동 모니터링 및 기록</li>
+                            <li>원료 등급판정 + 선도 예측</li>
+                            <li>이력추적: LOT 추적 + 리콜 관리</li>
+                        </ul>
+                        <div class="detail-subtitle">AI/ML 모델</div>
+                        <ul>
+                            <li>등급판정 AI (Grading)</li>
+                            <li>선도 예측 (Arrhenius 모델)</li>
+                            <li>수확시기 예측</li>
+                            <li>이물질 탐지 (Vision AI)</li>
+                            <li>미생물 성장 예측</li>
+                            <li>에너지 최적화</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 11. Textile -->
+                <div class="domain-card" data-domain="textile">
+                    <div class="domain-card-header">
+                        <div class="domain-card-icon" style="background:rgba(139,92,246,0.1); color:var(--accent); border:1px solid rgba(139,92,246,0.2);">
+                            <i class="bi bi-palette2"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="dom_text_title">섬유</h4>
+                            <div class="domain-subtitle" data-i18n="dom_text_sub">Textile Manufacturing</div>
+                        </div>
+                    </div>
+                    <p data-i18n="dom_text_desc">염색/가공 공정관리, 색상 매칭 AI, 직물 결함 검출, 환경규제(폐수/화학물질) 준수, 에너지 최적화를 지원합니다.</p>
+                    <div class="services-list">
+                        <span class="feature-tag feature-tag-purple">Dyeing</span>
+                        <span class="feature-tag feature-tag-purple">Finishing</span>
+                        <span class="feature-tag feature-tag-purple">Quality</span>
+                        <span class="feature-tag feature-tag-purple">Environment</span>
+                        <span class="feature-tag feature-tag-purple">Production</span>
+                    </div>
+                    <div class="regulations">
+                        <span class="regulation-badge">ISO 14001</span>
+                        <span class="regulation-badge">OEKO-TEX</span>
+                        <span class="ai-badge">6 AI Models</span>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-subtitle">핵심 기능</div>
+                        <ul>
+                            <li>염색 공정: 염료/조제 배합 최적화</li>
+                            <li>가공 공정: 후처리 관리</li>
+                            <li>색상 매칭 및 색차(ΔE) 품질관리</li>
+                            <li>직물 결함 검출 (Vision AI)</li>
+                            <li>폐수 처리 및 화학물질 관리</li>
+                            <li>에너지 최적화 (보일러, 건조기)</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Common 8-Layer Architecture ==================== -->
+    <section class="section py-5" id="architecture">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-primary" data-i18n="arch_tag">COMMON ARCHITECTURE</span>
+                <h2 class="section-title" data-i18n="arch_title">8계층 공통 시스템 아키텍처</h2>
+                <p class="section-desc" data-i18n="arch_desc">ISA-95 표준 기반 Purdue Model로 OT/IT를 분리하고, 마이크로서비스 아키텍처를 11개 산업 전체에 동일하게 적용합니다.</p>
+            </div>
+
+            <div class="arch-diagram fade-in">
+                <div class="arch-row">
+                    <span class="arch-label">L8</span>
+                    <span class="arch-name">Presentation Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">React 18 + TypeScript</span>
+                        <span class="arch-item">Tailwind CSS</span>
+                        <span class="arch-item">TanStack Query</span>
+                        <span class="arch-item">Zustand</span>
+                        <span class="arch-item">Recharts</span>
+                        <span class="arch-item">19 Standard Pages</span>
+                    </div>
+                </div>
+                <div class="arch-row">
+                    <span class="arch-label">L7</span>
+                    <span class="arch-name">API Gateway Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">Express.js</span>
+                        <span class="arch-item">JWT Auth</span>
+                        <span class="arch-item">RBAC</span>
+                        <span class="arch-item">Rate Limiting</span>
+                        <span class="arch-item">Circuit Breaker</span>
+                        <span class="arch-item">WAF</span>
+                    </div>
+                </div>
+                <div class="arch-row" style="background: rgba(139, 92, 246, 0.06); border-color: rgba(139, 92, 246, 0.15);">
+                    <span class="arch-label" style="color: var(--accent);">L6</span>
+                    <span class="arch-name" style="color: var(--accent);">Application Service Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item" style="border-color: rgba(139,92,246,0.3); color: var(--accent);">Production</span>
+                        <span class="arch-item" style="border-color: rgba(139,92,246,0.3); color: var(--accent);">Quality</span>
+                        <span class="arch-item" style="border-color: rgba(139,92,246,0.3); color: var(--accent);">Inventory</span>
+                        <span class="arch-item" style="border-color: rgba(139,92,246,0.3); color: var(--accent);">Maintenance</span>
+                        <span class="arch-item" style="border-color: rgba(139,92,246,0.3); color: var(--accent);">Domain-Specific ×N</span>
+                    </div>
+                </div>
+                <div class="arch-row" style="background: rgba(244, 114, 182, 0.06); border-color: rgba(244, 114, 182, 0.15);">
+                    <span class="arch-label" style="color: var(--companion);">L5</span>
+                    <span class="arch-name" style="color: var(--companion);">AI/ML Service Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item" style="border-color: rgba(244,114,182,0.3); color: var(--companion);">Quality Prediction</span>
+                        <span class="arch-item" style="border-color: rgba(244,114,182,0.3); color: var(--companion);">Anomaly Detection</span>
+                        <span class="arch-item" style="border-color: rgba(244,114,182,0.3); color: var(--companion);">Vision AI</span>
+                        <span class="arch-item" style="border-color: rgba(244,114,182,0.3); color: var(--companion);">Process Optimization</span>
+                        <span class="arch-item" style="border-color: rgba(244,114,182,0.3); color: var(--companion);">MLOps (MLflow+DVC)</span>
+                    </div>
+                </div>
+                <div class="arch-row">
+                    <span class="arch-label" style="color: var(--success);">L4</span>
+                    <span class="arch-name">Data Processing Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">Apache Kafka</span>
+                        <span class="arch-item">Airflow ETL</span>
+                        <span class="arch-item">Data Validation</span>
+                        <span class="arch-item">Stream Processing</span>
+                    </div>
+                </div>
+                <div class="arch-row">
+                    <span class="arch-label">L3</span>
+                    <span class="arch-name">Data Storage Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">PostgreSQL 16</span>
+                        <span class="arch-item">TimescaleDB</span>
+                        <span class="arch-item">MinIO (S3)</span>
+                        <span class="arch-item">Redis</span>
+                    </div>
+                </div>
+                <div class="arch-row">
+                    <span class="arch-label" style="color: var(--warning);">L2</span>
+                    <span class="arch-name">Edge Gateway Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">NVIDIA Jetson</span>
+                        <span class="arch-item">Protocol Converter</span>
+                        <span class="arch-item">Edge AI Inference</span>
+                        <span class="arch-item">Data Buffering</span>
+                    </div>
+                </div>
+                <div class="arch-row">
+                    <span class="arch-label" style="color: var(--text-muted);">L1</span>
+                    <span class="arch-name">OT Integration Layer</span>
+                    <div class="arch-items">
+                        <span class="arch-item">PLC (Siemens/Mitsubishi)</span>
+                        <span class="arch-item">SCADA</span>
+                        <span class="arch-item">MQTT/OPC-UA</span>
+                        <span class="arch-item">Sensors</span>
+                        <span class="arch-item">Vision Camera</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Common Technology Stack ==================== -->
+    <section class="section py-5 bg-dim position-relative" id="techstack">
+        <div class="glow-bg glow-bg-companion glow-bg-left"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-companion" data-i18n="stack_tag">TECHNOLOGY STACK</span>
+                <h2 class="section-title">
+                    <span class="text-gradient-companion" data-i18n="stack_title">11개 산업 공통 기술 스택</span>
+                </h2>
+                <p class="section-desc" data-i18n="stack_desc">모든 산업 도메인이 동일한 기술 기반 위에 구축됩니다. 산업별 차이는 L6 Application Layer의 도메인 특화 서비스에서만 발생합니다.</p>
+            </div>
+
+            <div class="stack-grid fade-in">
+                <div class="stack-card">
+                    <div class="stack-card-title"><i class="bi bi-window-stack me-2"></i>Frontend</div>
+                    <div class="stack-items">
+                        <span class="stack-item">React 18</span>
+                        <span class="stack-item">TypeScript</span>
+                        <span class="stack-item">Vite</span>
+                        <span class="stack-item">Tailwind CSS</span>
+                        <span class="stack-item">TanStack React Query</span>
+                        <span class="stack-item">Zustand</span>
+                        <span class="stack-item">Recharts</span>
+                        <span class="stack-item">React Hook Form</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title" style="color: var(--accent);"><i class="bi bi-server me-2"></i>Backend</div>
+                    <div class="stack-items">
+                        <span class="stack-item">FastAPI (Python)</span>
+                        <span class="stack-item">Express.js (Node.js)</span>
+                        <span class="stack-item">SQLAlchemy ORM</span>
+                        <span class="stack-item">Pydantic v2</span>
+                        <span class="stack-item">Alembic Migration</span>
+                        <span class="stack-item">Repository Pattern</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title" style="color: var(--success);"><i class="bi bi-database me-2"></i>Database & Storage</div>
+                    <div class="stack-items">
+                        <span class="stack-item">PostgreSQL 16</span>
+                        <span class="stack-item">TimescaleDB</span>
+                        <span class="stack-item">Redis 7</span>
+                        <span class="stack-item">Apache Kafka</span>
+                        <span class="stack-item">MinIO (S3)</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title" style="color: var(--companion);"><i class="bi bi-robot me-2"></i>AI/ML</div>
+                    <div class="stack-items">
+                        <span class="stack-item">PyTorch</span>
+                        <span class="stack-item">scikit-learn</span>
+                        <span class="stack-item">YOLOv8</span>
+                        <span class="stack-item">Prophet</span>
+                        <span class="stack-item">MLflow</span>
+                        <span class="stack-item">ONNX Runtime</span>
+                        <span class="stack-item">NVIDIA Jetson</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title" style="color: var(--warning);"><i class="bi bi-box-seam me-2"></i>DevOps & Infra</div>
+                    <div class="stack-items">
+                        <span class="stack-item">Docker Compose</span>
+                        <span class="stack-item">Prometheus</span>
+                        <span class="stack-item">Grafana</span>
+                        <span class="stack-item">Nginx</span>
+                        <span class="stack-item">GitHub Actions</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title" style="color: var(--danger);"><i class="bi bi-shield-lock me-2"></i>Security</div>
+                    <div class="stack-items">
+                        <span class="stack-item">JWT + RBAC</span>
+                        <span class="stack-item">TLS 1.3</span>
+                        <span class="stack-item">AES-256 Encryption</span>
+                        <span class="stack-item">Zero Trust</span>
+                        <span class="stack-item">WAF</span>
+                        <span class="stack-item">Purdue Model</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Common Workflow ==================== -->
+    <section class="section py-5" id="workflow">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-success" data-i18n="wf_tag">COMMON WORKFLOW</span>
+                <h2 class="section-title" data-i18n="wf_title">공통 제조 워크플로우</h2>
+                <p class="section-desc" data-i18n="wf_desc">11개 산업 모두 동일한 8단계 워크플로우 프레임워크를 따릅니다. 각 단계에 AI가 통합되어 자율적 의사결정을 지원합니다.</p>
+            </div>
+
+            <div class="workflow-pipeline fade-in">
+                <div class="workflow-step">
+                    <div class="workflow-step-number">1</div>
+                    <h5 data-i18n="wf_s1">수요 예측 / 생산 계획</h5>
+                    <p data-i18n="wf_s1_desc">AI 수요 예측 모델 → 생산 계획 수립 → 자재 자동 발주. 모든 산업에서 Prophet/LSTM 기반 예측 엔진 활용</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">2</div>
+                    <h5 data-i18n="wf_s2">원료 입고 / 검사</h5>
+                    <p data-i18n="wf_s2_desc">원료 LOT 등록 → 품질 검사 → 규제 사항 확인 (알레르겐/화학물질/GMP 등) → 입고 승인</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">3</div>
+                    <h5 data-i18n="wf_s3">전처리 / 배합</h5>
+                    <p data-i18n="wf_s3_desc">AI 레시피/배합비 최적화 → 원료 편차 실시간 보정 → CCP/공정 파라미터 모니터링 시작</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">4</div>
+                    <h5 data-i18n="wf_s4">본공정 / 가공</h5>
+                    <p data-i18n="wf_s4_desc">AI 공정 파라미터 최적화 → 실시간 품질 예측 → 이상 탐지 → 예측 정비 연동</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">5</div>
+                    <h5 data-i18n="wf_s5">품질 검사</h5>
+                    <p data-i18n="wf_s5_desc">Vision AI 검사 → 자동 결함 분류 → SPC 관리도 → Pass/Fail 판정 → 불량 원인 분석</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">6</div>
+                    <h5 data-i18n="wf_s6">포장 / 라벨링</h5>
+                    <p data-i18n="wf_s6_desc">중량 검사 → 라벨 검증 (규제 정보, 유효기간) → 시리얼라이제이션 → LOT 이력추적 완료</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">7</div>
+                    <h5 data-i18n="wf_s7">출하 / 유통</h5>
+                    <p data-i18n="wf_s7_desc">최종 검사 및 환경 확인 → 출하 승인 → 정방향 LOT 추적 활성화 → 유통 이력 관리</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-number">8</div>
+                    <h5 data-i18n="wf_s8">사후관리 / 리포팅</h5>
+                    <p data-i18n="wf_s8_desc">규제 보고서 자동 생성 → 감사 추적(Audit Trail) → AI 모델 재학습 → KPI 대시보드 갱신</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== AI/ML Pipeline ==================== -->
+    <section class="section py-5 bg-dim position-relative" id="ai-pipeline">
+        <div class="glow-bg glow-bg-accent glow-bg-left"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-companion" data-i18n="ai_tag">AI/ML PIPELINE</span>
+                <h2 class="section-title">
+                    <span class="text-gradient-companion" data-i18n="ai_title">공통 AI/ML 파이프라인</span>
+                </h2>
+                <p class="section-desc" data-i18n="ai_desc">Edge AI 실시간 추론과 서버 사이드 고급 분석을 결합한 하이브리드 AI 전략을 11개 산업에 동일하게 적용합니다.</p>
+            </div>
+
+            <div class="ai-grid fade-in">
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                    <h5 data-i18n="ai_quality">품질 예측</h5>
+                    <p data-i18n="ai_quality_desc">공정 변수 시계열 분석으로 품질 이탈을 사전에 예측합니다. 불량률 40~60% 감소 효과.</p>
+                    <div>
+                        <span class="ai-algo-tag">LSTM</span>
+                        <span class="ai-algo-tag">XGBoost</span>
+                        <span class="ai-algo-tag">SHAP</span>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                    <h5 data-i18n="ai_anomaly">이상 탐지</h5>
+                    <p data-i18n="ai_anomaly_desc">정상 패턴 학습 후 미세한 이상을 실시간 감지. 산업별 센서 데이터에 특화된 모델 적용.</p>
+                    <div>
+                        <span class="ai-algo-tag">Isolation Forest</span>
+                        <span class="ai-algo-tag">Autoencoder</span>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-eye"></i></div>
+                    <h5 data-i18n="ai_vision">비전 검사</h5>
+                    <p data-i18n="ai_vision_desc">외관 결함, 이물질, 라벨 등을 자동 검출. Edge AI로 100ms 이하 실시간 추론.</p>
+                    <div>
+                        <span class="ai-algo-tag">YOLOv8</span>
+                        <span class="ai-algo-tag">EfficientNet</span>
+                        <span class="ai-algo-tag">ONNX</span>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-sliders2"></i></div>
+                    <h5 data-i18n="ai_process">공정 최적화</h5>
+                    <p data-i18n="ai_process_desc">최적 공정 파라미터 자동 탐색. 원료 변동에 따른 적응적 제어로 수율 5~10% 향상.</p>
+                    <div>
+                        <span class="ai-algo-tag">PPO (RL)</span>
+                        <span class="ai-algo-tag">Bayesian Opt.</span>
+                        <span class="ai-algo-tag">Digital Twin</span>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                    <h5 data-i18n="ai_maintenance">예측 정비</h5>
+                    <p data-i18n="ai_maintenance_desc">진동/온도/전류 데이터로 잔존수명(RUL) 예측. 비계획 다운타임 30~50% 감소.</p>
+                    <div>
+                        <span class="ai-algo-tag">CNN-LSTM</span>
+                        <span class="ai-algo-tag">Survival Analysis</span>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h5 data-i18n="ai_demand">수요 예측</h5>
+                    <p data-i18n="ai_demand_desc">시계열 수요 예측으로 생산 계획 최적화. 재고 비용 절감 및 납기 준수율 향상.</p>
+                    <div>
+                        <span class="ai-algo-tag">Prophet</span>
+                        <span class="ai-algo-tag">LSTM</span>
+                        <span class="ai-algo-tag">LightGBM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edge & Server -->
+            <div class="row g-4 mt-4 fade-in">
+                <div class="col-md-6">
+                    <div class="glass-card p-4">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="icon-box-warning"><i class="bi bi-cpu"></i></div>
+                            <div>
+                                <h5 class="mb-0" data-i18n="ai_edge_title">Edge AI (NVIDIA Jetson)</h5>
+                                <small class="text-muted" data-i18n="ai_edge_sub">실시간 추론 < 100ms</small>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0" data-i18n="ai_edge_desc">IT 네트워크 단절 시에도 독립 운영. 비전 검사, CCP 이탈 즉시 경보. ONNX Runtime 기반.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="glass-card p-4">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="icon-box-accent"><i class="bi bi-gpu-card"></i></div>
+                            <div>
+                                <h5 class="mb-0" data-i18n="ai_server_title">GPU Server (NVIDIA L40S)</h5>
+                                <small class="text-muted" data-i18n="ai_server_sub">고급 분석 & 모델 학습</small>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-0" data-i18n="ai_server_desc">대규모 데이터 분석, 모델 학습/재학습. MLflow 자동 배포. 배치 추론 < 500ms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Microservices Pattern ==================== -->
+    <section class="section py-5" id="microservices">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-primary" data-i18n="svc_tag">MICROSERVICES PATTERN</span>
+                <h2 class="section-title" data-i18n="svc_title">공통 마이크로서비스 패턴</h2>
+                <p class="section-desc" data-i18n="svc_desc">모든 산업 도메인이 동일한 서비스 패턴을 따릅니다. 8~10개의 마이크로서비스로 구성되며, 산업별 특화 서비스만 달라집니다.</p>
+            </div>
+
+            <div class="row g-3 fade-in">
+                <!-- Common Services -->
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 h-100">
+                        <h5 class="mb-3"><i class="bi bi-diagram-3 me-2 text-primary-c"></i><span data-i18n="svc_common_title">공통 서비스 (모든 산업)</span></h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box"><i class="bi bi-shield-lock"></i></div>
+                                <div><strong>API Gateway</strong> <small class="text-muted d-block">Express.js | JWT, RBAC, Rate Limiting, Circuit Breaker</small></div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box-accent"><i class="bi bi-bar-chart-line"></i></div>
+                                <div><strong>Production Service</strong> <small class="text-muted d-block">FastAPI | 생산계획, 작업지시, 실적 관리</small></div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box-companion"><i class="bi bi-clipboard2-check"></i></div>
+                                <div><strong>Quality Service</strong> <small class="text-muted d-block">FastAPI | 검사, 불량관리, SPC, 시정조치</small></div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box-success"><i class="bi bi-gear-wide-connected"></i></div>
+                                <div><strong>Maintenance Service</strong> <small class="text-muted d-block">FastAPI | 설비관리, 예방정비, 예측정비</small></div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box-warning"><i class="bi bi-bell"></i></div>
+                                <div><strong>Notification Service</strong> <small class="text-muted d-block">Node.js | 실시간 알림, SMS/Email 연동</small></div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="icon-box"><i class="bi bi-cloud-arrow-down"></i></div>
+                                <div><strong>Data Ingestion Service</strong> <small class="text-muted d-block">Node.js | 센서 데이터 수집, Edge 통신</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Domain-Specific Services -->
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 h-100">
+                        <h5 class="mb-3"><i class="bi bi-puzzle me-2 text-accent-c"></i><span data-i18n="svc_domain_title">산업별 특화 서비스</span></h5>
+                        <div class="d-flex flex-column gap-2" style="font-size: 0.85rem;">
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-cup-hot me-2 text-primary-c"></i>식품</span>
+                                <span class="text-muted">HACCP, Traceability, Inventory</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-capsule me-2 text-accent-c"></i>제약</span>
+                                <span class="text-muted">GMP, Batch Record, Serialization, Cold Chain</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-droplet-half me-2 text-warning-c"></i>화학</span>
+                                <span class="text-muted">PSM, Chemical Safety, Environment</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-motherboard me-2 text-companion-c"></i>반도체</span>
+                                <span class="text-muted">FDC, APC, SECS/GEM, Yield</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-car-front me-2 text-success-c"></i>자동차</span>
+                                <span class="text-muted">IATF Compliance, Tool Management</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-battery-charging me-2 text-primary-c"></i>배터리</span>
+                                <span class="text-muted">Cell Tracking, Dryroom, Formation</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-hammer me-2 text-warning-c"></i>금속</span>
+                                <span class="text-muted">Process Control, Safety, Tool/Mold</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-heart-pulse me-2" style="color:var(--danger);"></i>의료기기</span>
+                                <span class="text-muted">Regulatory, Sterilization, Traceability</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-stars me-2 text-companion-c"></i>화장품</span>
+                                <span class="text-muted">CGMP, Formulation, Allergen, Regulatory</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span><i class="bi bi-flower1 me-2 text-success-c"></i>농수산물</span>
+                                <span class="text-muted">SmartFarm, Cold Chain, Raw Material</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-1">
+                                <span><i class="bi bi-palette2 me-2 text-accent-c"></i>섬유</span>
+                                <span class="text-muted">Dyeing, Finishing, Environment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Security Architecture ==================== -->
+    <section class="section py-5 bg-dim position-relative overflow-hidden" id="security">
+        <div class="glow-bg"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-primary" data-i18n="sec_tag">SECURITY</span>
+                <h2 class="section-title" data-i18n="sec_title">Purdue Model 기반 보안 아키텍처</h2>
+                <p class="section-desc" data-i18n="sec_desc">A3 Security의 OT/IT 보안 전문성을 바탕으로 11개 산업 전체에 Zero Trust 아키텍처를 적용합니다.</p>
+            </div>
+
+            <div class="security-badges mb-5 fade-in">
+                <span class="security-badge badge-privacy">Zero Trust</span>
+                <span class="security-badge badge-encrypt">AES-256 암호화</span>
+                <span class="security-badge badge-tls">TLS 1.3 / mTLS</span>
+                <span class="security-badge badge-local">OT/IT 분리</span>
+                <span class="security-badge badge-privacy">RBAC + ABAC</span>
+                <span class="security-badge badge-encrypt">HashiCorp Vault</span>
+            </div>
+
+            <!-- Purdue Model -->
+            <div class="row justify-content-center fade-in">
+                <div class="col-lg-10">
+                    <div class="glass-card p-4">
+                        <h5 class="text-center mb-4" data-i18n="sec_purdue_title">Purdue Model 네트워크 계층</h5>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="purdue-level" style="border-left-color: var(--danger);">
+                                <span class="purdue-label" style="color: var(--danger);">Level 5</span>
+                                <span data-i18n="sec_l5">Enterprise Network (인터넷/외부) &mdash; Enterprise Firewall + IDS/IPS</span>
+                            </div>
+                            <div class="purdue-level" style="border-left-color: var(--primary);">
+                                <span class="purdue-label" style="color: var(--primary);">Level 4</span>
+                                <span data-i18n="sec_l4">IT Zone &mdash; MES 서버, AI 서버, DB 서버, Grafana, Vault, SIEM</span>
+                            </div>
+                            <div class="purdue-level" style="border-left-color: var(--warning);">
+                                <span class="purdue-label" style="color: var(--warning);">Level 3</span>
+                                <span data-i18n="sec_l3">DMZ &mdash; Edge Gateway, Protocol Converter, Data Diode (단방향 전송)</span>
+                            </div>
+                            <div class="purdue-level" style="border-left-color: var(--success);">
+                                <span class="purdue-label" style="color: var(--success);">Level 2</span>
+                                <span data-i18n="sec_l2">OT Zone &mdash; SCADA, HMI</span>
+                            </div>
+                            <div class="purdue-level" style="border-left-color: var(--text-muted);">
+                                <span class="purdue-label">Level 1</span>
+                                <span data-i18n="sec_l1">OT Zone &mdash; PLC, RTU</span>
+                            </div>
+                            <div class="purdue-level" style="border-left-color: var(--text-muted);">
+                                <span class="purdue-label">Level 0</span>
+                                <span data-i18n="sec_l0">OT Zone &mdash; 센서, 비전카메라, 검출기, 액추에이터</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Comparison Matrix ==================== -->
+    <section class="section py-5" id="comparison">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-warning" data-i18n="comp_tag">COMPARISON MATRIX</span>
+                <h2 class="section-title" data-i18n="comp_title">산업별 기능 비교 매트릭스</h2>
+                <p class="section-desc" data-i18n="comp_desc">11개 산업 도메인의 기능 커버리지를 한눈에 비교합니다. 공통 기능은 동일하며, 산업별 특화 기능에서 차이가 발생합니다.</p>
+            </div>
+
+            <div class="matrix-container fade-in">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="comp_feature">기능 영역</th>
+                            <th><i class="bi bi-cup-hot"></i><br>식품</th>
+                            <th><i class="bi bi-capsule"></i><br>제약</th>
+                            <th><i class="bi bi-droplet-half"></i><br>화학</th>
+                            <th><i class="bi bi-motherboard"></i><br>반도체</th>
+                            <th><i class="bi bi-car-front"></i><br>자동차</th>
+                            <th><i class="bi bi-battery-charging"></i><br>배터리</th>
+                            <th><i class="bi bi-hammer"></i><br>금속</th>
+                            <th><i class="bi bi-heart-pulse"></i><br>의료</th>
+                            <th><i class="bi bi-stars"></i><br>화장품</th>
+                            <th><i class="bi bi-flower1"></i><br>농수산</th>
+                            <th><i class="bi bi-palette2"></i><br>섬유</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Common Features -->
+                        <tr>
+                            <td>생산관리 (MES Core)</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>품질관리 (SPC/검사)</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>설비/예측정비</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>AI 품질예측</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>비전 AI 검사</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <!-- Domain-specific -->
+                        <tr>
+                            <td>HACCP/CCP 관리</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>GMP/EBR 전자배치</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>PSM/안전관리</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>FDC/APC 공정제어</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>콜드체인 관리</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>알레르겐 추적</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>시리얼라이제이션</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>환경/탄소 관리</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>금형/공구 관리</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>드라이룸/클린룸</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>멸균 밸리데이션</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                        <tr>
+                            <td>스마트팜 IoT</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="cross-mark">&#8212;</td>
+                            <td class="check-mark">&#10003;</td>
+                            <td class="cross-mark">&#8212;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ROI Analysis ==================== -->
+    <section class="section py-5 position-relative" id="roi">
+        <div class="glow-bg"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-success" data-i18n="roi_tag">ROI ANALYSIS</span>
+                <h2 class="section-title" data-i18n="roi_title">AIMES 도입 기대 효과</h2>
+                <p class="section-desc" data-i18n="roi_desc">11개 산업 평균 기준, AIMES 도입 시 연간 2~6억원의 비용 절감과 품질/생산성 향상 효과가 기대됩니다.</p>
+            </div>
+
+            <!-- Before/After Comparison Table -->
+            <div class="roi-table-wrapper fade-in">
+                <table class="roi-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="roi_th1">지표</th>
+                            <th data-i18n="roi_th2">구축 전 (As-Is)</th>
+                            <th data-i18n="roi_th3">구축 후 (To-Be)</th>
+                            <th data-i18n="roi_th4">개선율</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OEE (설비종합효율)</td>
+                            <td>60~75%</td>
+                            <td>82~92%</td>
+                            <td class="roi-improve">+15~25%p</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="roi_r_defect">불량률</td>
+                            <td>3~10%</td>
+                            <td>1~4%</td>
+                            <td class="roi-improve">-40~60%</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="roi_r_downtime">비계획 정지시간</td>
+                            <td data-i18n="roi_dt_before">월 8~20시간</td>
+                            <td data-i18n="roi_dt_after">월 2~8시간</td>
+                            <td class="roi-improve">-50~70%</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="roi_r_yield">원료 수율</td>
+                            <td>85~92%</td>
+                            <td>90~97%</td>
+                            <td class="roi-improve">+3~8%p</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="roi_r_energy">에너지 비용</td>
+                            <td data-i18n="roi_en_before">100% (기준)</td>
+                            <td>80~90%</td>
+                            <td class="roi-improve">-10~20%</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="roi_r_regulation">규제대응 시간</td>
+                            <td data-i18n="roi_reg_before">월 40~80시간</td>
+                            <td data-i18n="roi_reg_after">월 8~16시간</td>
+                            <td class="roi-improve">-70~80%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ROI Summary Cards -->
+            <div class="row g-4 mt-4 fade-in">
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center">
+                        <div class="roi-value text-primary-c" style="font-size: 2rem;">2~5<small style="font-size:0.9rem;">억원</small></div>
+                        <div class="roi-label" data-i18n="roi_invest">투자 금액 (도메인당)</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center">
+                        <div class="roi-value text-success-c" style="font-size: 2rem;">2~6<small style="font-size:0.9rem;">억원/년</small></div>
+                        <div class="roi-label" data-i18n="roi_save">연간 절감 효과</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center">
+                        <div class="roi-value text-accent-c" style="font-size: 2rem;">1~2<small style="font-size:0.9rem;">년</small></div>
+                        <div class="roi-label" data-i18n="roi_payback">투자 회수 기간</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center">
+                        <div class="roi-value text-companion-c" style="font-size: 2rem;">400~800<small style="font-size:0.9rem;">%</small></div>
+                        <div class="roi-label" data-i18n="roi_5yr">5년 누적 ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Roadmap ==================== -->
+    <section class="section py-5 bg-dim" id="roadmap">
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-primary" data-i18n="rm_tag">ROADMAP</span>
+                <h2 class="section-title" data-i18n="rm_title">구현 로드맵</h2>
+                <p class="section-desc" data-i18n="rm_desc">Agile + 도메인 전문가 하이브리드 방법론으로 산업별 12~18개월 프로토타입 완성을 목표합니다.</p>
+            </div>
+
+            <div class="roadmap-timeline fade-in">
+                <div class="roadmap-item">
+                    <div class="rm-phase" style="background: var(--primary);">Phase 0</div>
+                    <div class="rm-content">
+                        <h5 data-i18n="rm_p0_title">기획 및 준비</h5>
+                        <span class="rm-duration" data-i18n="rm_p0_dur">1~2개월</span>
+                        <p class="small text-muted" data-i18n="rm_p0_desc">시장조사, 파일럿 기업 선정, As-Is 분석, ROI 목표 설정, 산업별 규제 요건 분석</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="rm-phase" style="background: var(--accent);">Phase 1</div>
+                    <div class="rm-content">
+                        <h5 data-i18n="rm_p1_title">프로토타입 설계</h5>
+                        <span class="rm-duration" data-i18n="rm_p1_dur">2~3개월</span>
+                        <p class="small text-muted" data-i18n="rm_p1_desc">시스템 아키텍처 설계, AI 모델 선정, IoT/센서 설치 계획, 보안 아키텍처 설계</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="rm-phase" style="background: var(--companion);">Phase 2</div>
+                    <div class="rm-content">
+                        <h5 data-i18n="rm_p2_title">프로토타입 개발</h5>
+                        <span class="rm-duration" data-i18n="rm_p2_dur">4~6개월</span>
+                        <p class="small text-muted" data-i18n="rm_p2_desc">AIMES Core + 도메인 특화 서비스 개발, IoT 인프라 구축, AI 모델 학습, 대시보드 구현</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="rm-phase" style="background: var(--success);">Phase 3</div>
+                    <div class="rm-content">
+                        <h5 data-i18n="rm_p3_title">검증 및 밸리데이션</h5>
+                        <span class="rm-duration" data-i18n="rm_p3_dur">3~4개월</span>
+                        <p class="small text-muted" data-i18n="rm_p3_desc">파일럿 라인 24/7 운영, AI 모델 튜닝, ROI 측정 및 검증, 규제 적합성 확인</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="rm-phase" style="background: var(--warning);">Phase 4</div>
+                    <div class="rm-content">
+                        <h5 data-i18n="rm_p4_title">상용화 및 확산</h5>
+                        <span class="rm-duration" data-i18n="rm_p4_dur">6개월+</span>
+                        <p class="small text-muted" data-i18n="rm_p4_desc">상용 릴리스, 추가 고객 확보, 모듈 확장, 타 산업 도메인 적용 확대</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Footer ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <span style="color: var(--primary);">AI</span>MES
+                        <span style="color: var(--accent); font-weight: 300; font-size: 0.8rem; letter-spacing: 2px;">ELEVEN</span>
+                    </div>
+                    <p class="footer-desc" data-i18n="footer_sub">11개 제조 산업을 위한 AI 기반 차세대 제조실행시스템</p>
+                    <p class="small text-muted" data-i18n="footer_by">Designed by Brian Lee / A3-AI Working Group</p>
+                </div>
+                <div class="col-lg-3 mb-4 mb-lg-0">
+                    <h6 class="mb-3" data-i18n="footer_links">빠른 링크</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="#domains" data-i18n="footer_domains">산업 도메인</a>
+                        <a href="#architecture" data-i18n="footer_arch">아키텍처</a>
+                        <a href="#techstack" data-i18n="footer_stack">기술 스택</a>
+                        <a href="#ai-pipeline" data-i18n="footer_ai">AI/ML</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="mb-3" data-i18n="footer_industries">11개 산업</h6>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="feature-tag" style="font-size: 0.65rem;">식품</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">제약</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">화학</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">반도체</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">자동차</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">배터리</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">금속</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">의료기기</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">화장품</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">농수산물</span>
+                        <span class="feature-tag" style="font-size: 0.65rem;">섬유</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright text-center mt-4">
+                &copy; 2025 A3 Security Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== Card Detail Modal ==================== -->
+    <div class="card-modal-overlay" id="cardModal">
+        <div class="card-modal">
+            <button class="modal-close" id="modalClose"><i class="bi bi-x-lg"></i></button>
+            <div class="card-modal-header" id="modalHeader"></div>
+            <div class="card-modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- ==================== Scripts ==================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
