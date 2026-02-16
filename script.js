@@ -487,7 +487,235 @@ const translations = {
     }
 };
 
+// ==================== Static Text Translation (non data-i18n elements) ====================
+// Korean → English mapping for elements without data-i18n attributes
+const koEnMap = {
+    // Hero ring labels
+    '식품': 'Food', '제약': 'Pharma', '화학': 'Chemical', '반도체': 'Semi',
+    '자동차': 'Auto', '배터리': 'Battery', '금속': 'Metal', '의료': 'Medical',
+    '화장품': 'Cosmetics', '농수산': 'Agri', '섬유': 'Textile',
+    '11개 산업': 'Eleven Industries',
+
+    // Overview feature tags
+    '8계층 아키텍처': '8-Layer Architecture', '마이크로서비스': 'Microservices',
+    '퍼듀 모델': 'Purdue Model', '제로 트러스트': 'Zero Trust',
+    '온프레미스': 'On-Premises', '종단간 암호화': 'E2E Encryption',
+
+    // Domain card feature tags
+    '생산관리': 'Production', '품질관리': 'Quality', '이력추적': 'Traceability',
+    '재고관리': 'Inventory', '설비정비': 'Maintenance',
+    'GMP 준수': 'GMP Compliance', '배치 기록': 'Batch Record', '콜드체인': 'Cold Chain',
+    '시리얼라이제이션': 'Serialization', '공정안전관리': 'PSM', '반응공정': 'Reaction',
+    '화학물질 안전': 'Chemical Safety', '환경관리': 'Environment',
+    '수율관리': 'Yield', '레시피관리': 'Recipe',
+    'IATF 준수': 'IATF Compliance', '금형/공구관리': 'Tool Mgmt',
+    '셀 추적': 'Cell Tracking', '드라이룸': 'Dryroom', '전극공정': 'Electrode',
+    '화성/에이징': 'Formation', '공정제어': 'Process Control', '안전관리': 'Safety',
+    '금형/공구': 'Tool/Mold', '규제관리': 'Regulatory', '멸균관리': 'Sterilization',
+    '처방관리': 'Formulation', '알레르겐': 'Allergen',
+    '스마트팜': 'SmartFarm', '원료관리': 'Raw Material',
+    '염색공정': 'Dyeing', '가공/후처리': 'Finishing',
+
+    // AI / Regulation badges
+    'AI 모델 6종': '6 AI Models', 'AI 모델 8종': '8 AI Models',
+    'EU 규정': 'EU Reg', 'SEMI 표준': 'SEMI Standards',
+
+    // Architecture layer names
+    '프레젠테이션 계층': 'Presentation Layer', 'API 게이트웨이 계층': 'API Gateway Layer',
+    '애플리케이션 서비스 계층': 'Application Service Layer',
+    'AI/ML 서비스 계층': 'AI/ML Service Layer',
+    '데이터 처리 계층': 'Data Processing Layer', '데이터 저장 계층': 'Data Storage Layer',
+    '엣지 게이트웨이 계층': 'Edge Gateway Layer', 'OT 통합 계층': 'OT Integration Layer',
+
+    // Architecture items
+    '19개 표준 페이지': '19 Standard Pages', 'JWT 인증': 'JWT Auth',
+    '역할 기반 접근제어': 'RBAC', '요청 제한': 'Rate Limiting',
+    '서킷 브레이커': 'Circuit Breaker', '웹 방화벽': 'WAF',
+    '도메인 특화 ×N': 'Domain-Specific ×N',
+    '품질 예측': 'Quality Prediction', '이상 탐지': 'Anomaly Detection',
+    '비전 AI': 'Vision AI', '공정 최적화': 'Process Optimization',
+    '데이터 검증': 'Data Validation', '스트림 처리': 'Stream Processing',
+    '프로토콜 변환기': 'Protocol Converter', '엣지 AI 추론': 'Edge AI Inference',
+    '데이터 버퍼링': 'Data Buffering', '센서': 'Sensors', '비전 카메라': 'Vision Camera',
+
+    // Tech stack titles
+    '프론트엔드': 'Frontend', '백엔드': 'Backend',
+    '데이터베이스 및 저장소': 'Database & Storage',
+    '데브옵스 및 인프라': 'DevOps & Infra', '보안': 'Security',
+    '리포지토리 패턴': 'Repository Pattern',
+
+    // Security badges
+    '역할/속성 기반 접근제어': 'RBAC + ABAC',
+
+    // Purdue levels
+    '레벨 5': 'Level 5', '레벨 4': 'Level 4', '레벨 3': 'Level 3',
+    '레벨 2': 'Level 2', '레벨 1': 'Level 1', '레벨 0': 'Level 0',
+
+    // Roadmap phases
+    '단계 0': 'Phase 0', '단계 1': 'Phase 1', '단계 2': 'Phase 2',
+    '단계 3': 'Phase 3', '단계 4': 'Phase 4',
+};
+
+// Selectors for elements that need static text translation
+const staticSelectors = [
+    '.ring-item span', '.ring-center-label small',
+    '.feature-tag', '.ai-badge', '.regulation-badge', '.security-badge',
+    '.arch-name', '.arch-item',
+    '.stack-card-title', '.stack-item',
+    '.purdue-label', '.rm-phase',
+];
+
+// Selectors for elements where full innerHTML/textContent needs mapping
+const textSelectors = [
+    '.services-list .feature-tag',
+    '.regulations .ai-badge',
+    '.regulations .regulation-badge',
+];
+
+// Microservice names & descriptions (selector → [ko, en])
+const blockTranslations = {
+    en: [
+        // Microservice names & descriptions
+        { sel: '.icon-box + div strong', pairs: [
+            ['API 게이트웨이', 'API Gateway'],
+            ['생산관리 서비스', 'Production Service'],
+            ['품질관리 서비스', 'Quality Service'],
+            ['설비정비 서비스', 'Maintenance Service'],
+            ['알림 서비스', 'Notification Service'],
+            ['데이터 수집 서비스', 'Data Ingestion Service'],
+        ]},
+        { sel: '.icon-box + div small, .icon-box-accent + div small, .icon-box-companion + div small, .icon-box-success + div small, .icon-box-warning + div small, [class^="icon-box"] + div small', pairs: [
+            ['Express.js | JWT 인증, 역할기반접근제어, 요청제한, 서킷브레이커', 'Express.js | JWT, RBAC, Rate Limiting, Circuit Breaker'],
+            ['Node.js | 실시간 알림, SMS/이메일 연동', 'Node.js | Real-time alerts, SMS/Email integration'],
+            ['Node.js | 센서 데이터 수집, 엣지 통신', 'Node.js | Sensor data collection, Edge communication'],
+        ]},
+        // Domain-specific service descriptions (right panel)
+        { sel: '#microservices .col-lg-6:last-child .text-muted', pairs: [
+            ['HACCP, 이력추적, 재고관리', 'HACCP, Traceability, Inventory'],
+            ['GMP, 배치기록, 시리얼라이제이션, 콜드체인', 'GMP, Batch Record, Serialization, Cold Chain'],
+            ['공정안전관리, 화학물질 안전, 환경관리', 'PSM, Chemical Safety, Environment'],
+            ['결함탐지, 공정제어, SECS/GEM, 수율관리', 'FDC, APC, SECS/GEM, Yield'],
+            ['IATF 준수, 금형/공구 관리', 'IATF Compliance, Tool Management'],
+            ['셀 추적, 드라이룸, 화성/에이징', 'Cell Tracking, Dryroom, Formation'],
+            ['공정제어, 안전관리, 금형/공구', 'Process Control, Safety, Tool/Mold'],
+            ['규제관리, 멸균관리, 이력추적', 'Regulatory, Sterilization, Traceability'],
+            ['CGMP, 처방관리, 알레르겐, 규제관리', 'CGMP, Formulation, Allergen, Regulatory'],
+            ['스마트팜, 콜드체인, 원료관리', 'SmartFarm, Cold Chain, Raw Material'],
+            ['염색, 가공/후처리, 환경관리', 'Dyeing, Finishing, Environment'],
+        ]},
+    ],
+};
+
 let currentLang = 'ko';
+
+function applyStaticTranslations(lang) {
+    if (lang === 'en') {
+        // Apply Korean → English for static elements
+        staticSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                const text = el.textContent.trim();
+                if (!el._originalStaticText) el._originalStaticText = text;
+                if (koEnMap[text]) el.textContent = koEnMap[text];
+            });
+        });
+
+        // Apply block translations
+        if (blockTranslations.en) {
+            blockTranslations.en.forEach(block => {
+                document.querySelectorAll(block.sel).forEach(el => {
+                    const text = el.textContent.trim();
+                    if (!el._originalStaticText) el._originalStaticText = text;
+                    block.pairs.forEach(([ko, en]) => {
+                        if (text === ko) el.textContent = en;
+                    });
+                });
+            });
+        }
+
+        // Footer copyright
+        const copyright = document.querySelector('.footer-copyright');
+        if (copyright) {
+            if (!copyright._originalStaticText) copyright._originalStaticText = copyright.innerHTML;
+            copyright.innerHTML = '&copy; 2025 A3 Security Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.';
+        }
+
+        // Stack card titles (need special handling because they contain icons)
+        document.querySelectorAll('.stack-card-title').forEach(el => {
+            if (!el._originalStaticHTML) el._originalStaticHTML = el.innerHTML;
+            const iconMatch = el.innerHTML.match(/(<i[^>]*><\/i>)/);
+            const icon = iconMatch ? iconMatch[1] : '';
+            const text = el.textContent.trim();
+            if (koEnMap[text]) el.innerHTML = icon + ' ' + koEnMap[text];
+        });
+
+        // Microservice strong names (inside divs with icon-box)
+        document.querySelectorAll('#microservices strong').forEach(el => {
+            const text = el.textContent.trim();
+            if (!el._originalStaticText) el._originalStaticText = text;
+            const map = {
+                'API 게이트웨이': 'API Gateway', '생산관리 서비스': 'Production Service',
+                '품질관리 서비스': 'Quality Service', '설비정비 서비스': 'Maintenance Service',
+                '알림 서비스': 'Notification Service', '데이터 수집 서비스': 'Data Ingestion Service',
+            };
+            if (map[text]) el.textContent = map[text];
+        });
+
+        // Microservice small descriptions
+        document.querySelectorAll('#microservices small').forEach(el => {
+            const text = el.textContent.trim();
+            if (!el._originalStaticText) el._originalStaticText = text;
+            const map = {
+                'Express.js | JWT 인증, 역할기반접근제어, 요청제한, 서킷브레이커': 'Express.js | JWT, RBAC, Rate Limiting, Circuit Breaker',
+                'FastAPI | 생산계획, 작업지시, 실적 관리': 'FastAPI | Production planning, work orders, performance',
+                'FastAPI | 검사, 불량관리, SPC, 시정조치': 'FastAPI | Inspection, defect management, SPC, corrective action',
+                'FastAPI | 설비관리, 예방정비, 예측정비': 'FastAPI | Equipment, preventive & predictive maintenance',
+                'Node.js | 실시간 알림, SMS/이메일 연동': 'Node.js | Real-time alerts, SMS/Email integration',
+                'Node.js | 센서 데이터 수집, 엣지 통신': 'Node.js | Sensor data collection, Edge communication',
+            };
+            if (map[text]) el.textContent = map[text];
+        });
+
+        // Domain-specific service descriptions (right panel) - use broad selector + content match
+        document.querySelectorAll('#microservices .text-muted').forEach(el => {
+            const text = el.textContent.trim();
+            if (!el._originalStaticText) el._originalStaticText = text;
+            const map = {
+                'HACCP, 이력추적, 재고관리': 'HACCP, Traceability, Inventory',
+                'GMP, 배치기록, 시리얼라이제이션, 콜드체인': 'GMP, Batch Record, Serialization, Cold Chain',
+                '공정안전관리, 화학물질 안전, 환경관리': 'PSM, Chemical Safety, Environment',
+                '결함탐지, 공정제어, SECS/GEM, 수율관리': 'FDC, APC, SECS/GEM, Yield',
+                'IATF 준수, 금형/공구 관리': 'IATF Compliance, Tool Management',
+                '셀 추적, 드라이룸, 화성/에이징': 'Cell Tracking, Dryroom, Formation',
+                '공정제어, 안전관리, 금형/공구': 'Process Control, Safety, Tool/Mold',
+                '규제관리, 멸균관리, 이력추적': 'Regulatory, Sterilization, Traceability',
+                'CGMP, 처방관리, 알레르겐, 규제관리': 'CGMP, Formulation, Allergen, Regulatory',
+                '스마트팜, 콜드체인, 원료관리': 'SmartFarm, Cold Chain, Raw Material',
+                '염색, 가공/후처리, 환경관리': 'Dyeing, Finishing, Environment',
+            };
+            if (map[text]) el.textContent = map[text];
+        });
+
+    } else {
+        // Restore Korean for all static elements
+        const allSelectors = [...staticSelectors, '#microservices strong', '#microservices small.text-muted', '#microservices .text-muted'];
+        allSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                if (el._originalStaticText) el.textContent = el._originalStaticText;
+            });
+        });
+
+        // Restore stack card titles HTML
+        document.querySelectorAll('.stack-card-title').forEach(el => {
+            if (el._originalStaticHTML) el.innerHTML = el._originalStaticHTML;
+        });
+
+        // Restore footer copyright
+        const copyright = document.querySelector('.footer-copyright');
+        if (copyright && copyright._originalStaticText) {
+            copyright.innerHTML = copyright._originalStaticText;
+        }
+    }
+}
 
 function setLanguage(lang) {
     currentLang = lang;
@@ -515,6 +743,9 @@ function setLanguage(lang) {
             }
         });
     }
+
+    // Apply static translations for non data-i18n elements
+    applyStaticTranslations(lang);
 }
 
 // Store original Korean text on load
