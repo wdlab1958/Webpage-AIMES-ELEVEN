@@ -293,6 +293,9 @@ const translations = {
         nav_compare: 'Matrix',
         nav_roi: 'ROI',
 
+        // Nav
+        nav_status: 'Status',
+
         // Hero
         hero_title_1: 'Spanning 11 Industries',
         hero_title_2: 'AI Manufacturing Platform',
@@ -300,9 +303,9 @@ const translations = {
         hero_btn_domains: 'Explore 11 Industries',
         hero_btn_arch: 'Common Architecture',
         stat_domains: 'Industries',
-        stat_services: '+ Microservices',
-        stat_api: '+ API Endpoints',
-        stat_ai: '+ AI/ML Models',
+        stat_services: 'Microservices',
+        stat_files: 'Source Files',
+        stat_tests: 'Tests 100% PASS',
 
         // Overview
         ov_tag: 'PLATFORM OVERVIEW',
@@ -314,6 +317,26 @@ const translations = {
         ov_domain_desc: 'Dedicated services and AI models tailored to each industry\'s regulations, processes, and quality standards.',
         ov_sec_title: 'Built-in Security',
         ov_sec_desc: 'Zero Trust architecture applied to all industries based on A3 Security\'s OT/IT security expertise.',
+
+        // Project Status
+        ps_tag: 'PROJECT STATUS',
+        ps_title: '11-Domain Implementation Status',
+        ps_desc: 'All 11 domains are fully implemented with 100% test pass rate. Total: 2,394 source files, 96 microservices, 1,313 tests all PASS.',
+        ps_th_domain: 'Domain',
+        ps_th_services: 'Services',
+        ps_th_pages: 'Pages',
+        ps_th_files: 'Source Files',
+        ps_th_tests: 'Tests',
+        ps_th_pass: 'Pass Rate',
+        ps_th_fe_port: 'Frontend',
+        ps_th_gw_port: 'Gateway',
+        ps_total: 'Total',
+        ps_launcher_title: 'Unified Launcher',
+        ps_launcher_desc: 'Start_all_AIMES.sh launches all 11 projects simultaneously with a single command.',
+        ps_test_title: '1,313 Tests 100% PASS',
+        ps_test_desc: 'All 11 domains pass 100% of their tests. Most tests: Medical (161).',
+        ps_i18n_title: 'Multilingual (i18n)',
+        ps_i18n_desc: '9 of 11 domains support Korean/English. Real-time switching via useLanguageStore.',
 
         // Domains
         dom_tag: '11 INDUSTRIAL DOMAINS',
@@ -410,7 +433,7 @@ const translations = {
         // Microservices
         svc_tag: 'MICROSERVICES PATTERN',
         svc_title: 'Common Microservices Pattern',
-        svc_desc: 'All domains follow the same service pattern. Composed of 8-10 microservices, only domain-specific services differ by industry.',
+        svc_desc: 'All domains follow the same service pattern. Composed of 1-10 microservices (96 total), only domain-specific services differ by industry.',
         svc_common_title: 'Common Services (All Industries)',
         svc_domain_title: 'Industry-Specific Services',
 
@@ -477,8 +500,9 @@ const translations = {
 
         // Footer
         footer_sub: 'AI-based next-gen MES for 11 manufacturing industries',
-        footer_by: 'Designed by Brian Lee / A3-AI Working Group',
+        footer_by: 'Designed by Brian Lee / A3 Security AITF Working Group',
         footer_links: 'Quick Links',
+        footer_status: 'Project Status',
         footer_domains: 'Industries',
         footer_arch: 'Architecture',
         footer_stack: 'Tech Stack',
@@ -516,6 +540,13 @@ const koEnMap = {
     '스마트팜': 'SmartFarm', '원료관리': 'Raw Material',
     '염색공정': 'Dyeing', '가공/후처리': 'Finishing',
 
+    // Domain meta badges
+    '9 서비스': '9 Services', '10 서비스': '10 Services', '8 서비스': '8 Services', '1 서비스': '1 Service',
+    '359 파일': '359 Files', '376 파일': '376 Files', '126 파일': '126 Files',
+    '341 파일': '341 Files', '129 파일': '129 Files', '51 파일': '51 Files',
+    '130 파일': '130 Files', '131 파일': '131 Files', '273 파일': '273 Files',
+    '402 파일': '402 Files', '76 파일': '76 Files',
+
     // AI / Regulation badges
     'AI 모델 6종': '6 AI Models', 'AI 모델 8종': '8 AI Models',
     'EU 규정': 'EU Reg', 'SEMI 표준': 'SEMI Standards',
@@ -528,7 +559,7 @@ const koEnMap = {
     '엣지 게이트웨이 계층': 'Edge Gateway Layer', 'OT 통합 계층': 'OT Integration Layer',
 
     // Architecture items
-    '19개 표준 페이지': '19 Standard Pages', 'JWT 인증': 'JWT Auth',
+    '17~21개 표준 페이지': '17-21 Standard Pages', 'JWT 인증': 'JWT Auth',
     '역할 기반 접근제어': 'RBAC', '요청 제한': 'Rate Limiting',
     '서킷 브레이커': 'Circuit Breaker', '웹 방화벽': 'WAF',
     '도메인 특화 ×N': 'Domain-Specific ×N',
@@ -563,6 +594,7 @@ const staticSelectors = [
     '.arch-name', '.arch-item',
     '.stack-card-title', '.stack-item',
     '.purdue-label', '.rm-phase',
+    '.meta-badge',
 ];
 
 // Selectors for elements where full innerHTML/textContent needs mapping
@@ -636,7 +668,7 @@ function applyStaticTranslations(lang) {
         const copyright = document.querySelector('.footer-copyright');
         if (copyright) {
             if (!copyright._originalStaticText) copyright._originalStaticText = copyright.innerHTML;
-            copyright.innerHTML = '&copy; 2025 A3 Security Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.';
+            copyright.innerHTML = '&copy; 2026 A3 Security Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.';
         }
 
         // Stack card titles (need special handling because they contain icons)

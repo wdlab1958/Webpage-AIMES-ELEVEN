@@ -36,6 +36,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#project-status" data-i18n="nav_status">프로젝트 현황</a></li>
                     <li class="nav-item"><a class="nav-link" href="#domains" data-i18n="nav_domains">산업 도메인</a></li>
                     <li class="nav-item"><a class="nav-link" href="#architecture" data-i18n="nav_arch">아키텍처</a></li>
                     <li class="nav-item"><a class="nav-link" href="#techstack" data-i18n="nav_stack">기술 스택</a></li>
@@ -62,7 +63,7 @@
                 <div class="col-lg-7 content-fade-up">
                     <div class="mb-3">
                         <span class="section-tag section-tag-primary">A3 Security Co., Ltd.</span>
-                        <span class="section-tag section-tag-accent ms-2">A3-AI Working Group</span>
+                        <span class="section-tag section-tag-accent ms-2">AITF Working Group</span>
                     </div>
                     <h1 class="hero-title">
                         <span data-i18n="hero_title_1">11개 산업을 아우르는</span><br>
@@ -86,20 +87,20 @@
                         </div>
                         <div class="col-3">
                             <div class="stat-box">
-                                <div class="stat-number" data-count="100">0</div>
-                                <div class="stat-label" data-i18n="stat_services">+ 마이크로서비스</div>
+                                <div class="stat-number" data-count="96">0</div>
+                                <div class="stat-label" data-i18n="stat_services">마이크로서비스</div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="stat-box">
-                                <div class="stat-number" data-count="1100">0</div>
-                                <div class="stat-label" data-i18n="stat_api">+ API 엔드포인트</div>
+                                <div class="stat-number" data-count="2394">0</div>
+                                <div class="stat-label" data-i18n="stat_files">소스 파일</div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="stat-box">
-                                <div class="stat-number" data-count="60">0</div>
-                                <div class="stat-label" data-i18n="stat_ai">+ AI/ML 모델</div>
+                                <div class="stat-number" data-count="1313">0</div>
+                                <div class="stat-label" data-i18n="stat_tests">테스트 100% PASS</div>
                             </div>
                         </div>
                     </div>
@@ -186,6 +187,138 @@
         </div>
     </section>
 
+    <!-- ==================== Project Status Dashboard ==================== -->
+    <section class="section py-5 bg-dim position-relative" id="project-status">
+        <div class="glow-bg glow-bg-companion glow-bg-left"></div>
+        <div class="container py-5">
+            <div class="text-center mb-5 fade-in">
+                <span class="section-tag section-tag-success" data-i18n="ps_tag">프로젝트 현황</span>
+                <h2 class="section-title">
+                    <span class="text-gradient" data-i18n="ps_title">11개 도메인 구현 현황</span>
+                </h2>
+                <p class="section-desc" data-i18n="ps_desc">모든 11개 도메인이 100% 테스트 통과율로 구현 완료되었습니다. 총 2,394개 소스 파일, 96개 마이크로서비스, 1,313개 테스트 모두 PASS.</p>
+            </div>
+
+            <!-- Domain Comparison Table -->
+            <div class="matrix-container fade-in mb-5">
+                <table class="comparison-table status-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="ps_th_domain">도메인</th>
+                            <th data-i18n="ps_th_services">서비스</th>
+                            <th data-i18n="ps_th_pages">페이지</th>
+                            <th data-i18n="ps_th_files">소스 파일</th>
+                            <th data-i18n="ps_th_tests">테스트</th>
+                            <th data-i18n="ps_th_pass">통과율</th>
+                            <th data-i18n="ps_th_fe_port">Frontend</th>
+                            <th data-i18n="ps_th_gw_port">Gateway</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="bi bi-flower1 me-1 text-success-c"></i>Agricultural</td>
+                            <td>9</td><td>19</td><td>402</td><td>122</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5173</td><td class="port-cell">28080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-car-front me-1 text-success-c"></i>Automotive</td>
+                            <td>10</td><td>19</td><td>129</td><td>143</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5174</td><td class="port-cell">58080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-battery-charging me-1 text-primary-c"></i>Battery</td>
+                            <td>10</td><td>21</td><td>51</td><td>126</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5175</td><td class="port-cell">40080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-droplet-half me-1 text-warning-c"></i>Chemical</td>
+                            <td>8</td><td>21</td><td>126</td><td>117</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5176</td><td class="port-cell">39080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-stars me-1 text-companion-c"></i>Cosmetics</td>
+                            <td>10</td><td>19</td><td>273</td><td>110</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5177</td><td class="port-cell">18080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-motherboard me-1 text-companion-c"></i>Electronics</td>
+                            <td>10</td><td>19</td><td>341</td><td>118</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5178</td><td class="port-cell">48080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-cup-hot me-1 text-primary-c"></i>Food</td>
+                            <td>9</td><td>19</td><td>359</td><td>103</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5179</td><td class="port-cell">9080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-heart-pulse me-1" style="color:var(--danger);"></i>Medical</td>
+                            <td>10</td><td>19</td><td>131</td><td>161</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5180</td><td class="port-cell">29080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-hammer me-1 text-warning-c"></i>Metal</td>
+                            <td>10</td><td>20</td><td>130</td><td>131</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5181</td><td class="port-cell">49080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-capsule me-1 text-accent-c"></i>Pharmaceutical</td>
+                            <td>9</td><td>19</td><td>376</td><td>97</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5182</td><td class="port-cell">38080</td>
+                        </tr>
+                        <tr>
+                            <td><i class="bi bi-palette2 me-1 text-accent-c"></i>Textile</td>
+                            <td>1</td><td>19</td><td>76</td><td>85</td>
+                            <td class="check-mark">100%</td>
+                            <td class="port-cell">5183</td><td class="port-cell">50080</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong data-i18n="ps_total">합계</strong></td>
+                            <td><strong>96</strong></td><td><strong>213</strong></td><td><strong>2,394</strong></td><td><strong>1,313</strong></td>
+                            <td class="check-mark"><strong>100%</strong></td>
+                            <td colspan="2" class="port-cell"><strong>5173~5183</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Unified Launcher Info -->
+            <div class="row g-4 fade-in">
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg mx-auto mb-3"><i class="bi bi-play-circle"></i></div>
+                        <h5 data-i18n="ps_launcher_title">통합 실행 스크립트</h5>
+                        <p class="small text-muted" data-i18n="ps_launcher_desc">Start_all_AIMES.sh로 11개 프로젝트를 단일 명령어로 동시 실행/종료합니다.</p>
+                        <code class="d-block mt-2" style="color: var(--primary); font-size: 0.8rem;">bash Start_all_AIMES.sh</code>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg icon-box-accent mx-auto mb-3"><i class="bi bi-check2-all"></i></div>
+                        <h5 data-i18n="ps_test_title">1,313 테스트 100% PASS</h5>
+                        <p class="small text-muted" data-i18n="ps_test_desc">모든 11개 도메인에서 전체 테스트가 100% 통과합니다. 최다 테스트: Medical (161건).</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="icon-box-lg icon-box-success mx-auto mb-3"><i class="bi bi-translate"></i></div>
+                        <h5 data-i18n="ps_i18n_title">다국어 지원 (i18n)</h5>
+                        <p class="small text-muted" data-i18n="ps_i18n_desc">11개 중 9개 도메인이 한국어/영어 다국어를 지원합니다. useLanguageStore 기반 실시간 전환.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ==================== 11 Industry Domains ==================== -->
     <section class="section py-5 bg-dim position-relative" id="domains">
         <div class="glow-bg glow-bg-accent"></div>
@@ -212,6 +345,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_food_desc">HACCP CCP 모니터링, 레시피 최적화, 콜드체인 관리, 이력추적(LOT) 등 식품 안전과 품질을 AI로 혁신합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>9 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>359 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>103/103 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5179</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag">생산관리</span>
                         <span class="feature-tag">품질관리</span>
@@ -226,6 +365,13 @@
                         <span class="ai-badge">AI 모델 6종</span>
                     </div>
                     <div class="card-detail">
+                        <div class="detail-subtitle">프로젝트 현황</div>
+                        <ul>
+                            <li>소스 파일: 359개 | 페이지: 19개 | 테스트: 103/103 PASS</li>
+                            <li>Frontend Port: 5179 | API Gateway: 9080</li>
+                            <li>Docker 지원 (최대 20개 컨테이너)</li>
+                            <li>다국어 지원 (한국어/영어)</li>
+                        </ul>
                         <div class="detail-subtitle">핵심 기능</div>
                         <ul>
                             <li>HACCP CCP 실시간 모니터링 및 자동 기록</li>
@@ -233,6 +379,7 @@
                             <li>원료 배합비 자동 최적화</li>
                             <li>알레르겐 추적 및 리콜 관리</li>
                             <li>콜드체인 온도 모니터링</li>
+                            <li>IoT 센서 연동 (MQTT, Kafka)</li>
                         </ul>
                         <div class="detail-subtitle">AI/ML 모델</div>
                         <ul>
@@ -258,6 +405,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_pharma_desc">FDA 21 CFR Part 11 전자배치기록, GMP 일탈관리, 콜드체인 4존 모니터링, 시리얼라이제이션으로 의약품 무결성을 보장합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>9 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>376 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>97/97 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5182</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-purple">GMP 준수</span>
                         <span class="feature-tag feature-tag-purple">배치 기록</span>
@@ -305,6 +458,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_chem_desc">공정안전관리(PSM), K-REACH 화학물질 등록, 가스누출 감지, 탄소배출 관리, ESG 보고까지 화학공정의 안전과 환경을 통합관리합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>8 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>126 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>117/117 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5176</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-amber">공정안전관리</span>
                         <span class="feature-tag feature-tag-amber">반응공정</span>
@@ -353,6 +512,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_elec_desc">Lot/Wafer 추적, AOI 비전검사, SPC, FDC/APC 고급 공정제어, SECS/GEM 장비 인터페이스, 클린룸 모니터링을 구현합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>341 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>118/118 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5178</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-pink">수율관리</span>
                         <span class="feature-tag feature-tag-pink">레시피관리</span>
@@ -402,6 +567,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_auto_desc">IATF 16949 품질표준 준수, 공정능력(Ppk/Cpk) 분석, FMEA 관리, VIN 추적, 금형/공구 수명관리를 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>129 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>143/143 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5174</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-green">생산관리</span>
                         <span class="feature-tag feature-tag-green">IATF 준수</span>
@@ -439,6 +610,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_bat_desc">셀 ID 추적, 드라이룸 환경관리, 전극공정(코팅/건조/슬리팅), 화성/에이징, 용량/임피던스 테스트를 통합 관리합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>51 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>126/126 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5175</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag">셀 추적</span>
                         <span class="feature-tag">드라이룸</span>
@@ -474,6 +651,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_metal_desc">용해/주조/압연/열처리 공정 추적, 합금 조성 모니터링, 인장강도/경도 시험, 부식률 예측, 금형관리를 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>130 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>131/131 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5181</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-amber">생산관리</span>
                         <span class="feature-tag feature-tag-amber">공정제어</span>
@@ -510,6 +693,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_med_desc">FDA 510(k) 규제 준수, ISO 13485 품질시스템, 멸균 밸리데이션, 생체적합성 시험, 기기 시리얼 이력추적을 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>131 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>161/161 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5180</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">생산관리</span>
                         <span class="feature-tag" style="background:rgba(239,68,68,0.08); color:var(--danger); border-color:rgba(239,68,68,0.2);">규제관리</span>
@@ -547,6 +736,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_cosm_desc">CGMP/ISO 22716 규제 준수, 처방(INCI) 관리, EU 26종 알레르겐 추적, pH/점도/색차(ΔE) 품질관리, 다국가 인허가를 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>10 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>273 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>110/110 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5177</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-pink">CGMP</span>
                         <span class="feature-tag feature-tag-pink">처방관리</span>
@@ -593,6 +788,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_agri_desc">스마트팜/양식장 IoT 연동, 콜드체인 5존 모니터링, 선도예측(Arrhenius), 등급판정 AI, HACCP 준수를 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>9 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>402 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>122/122 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5173</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-green">HACCP</span>
                         <span class="feature-tag feature-tag-green">콜드체인</span>
@@ -638,6 +839,12 @@
                         </div>
                     </div>
                     <p data-i18n="dom_text_desc">염색/가공 공정관리, 색상 매칭 AI, 직물 결함 검출, 환경규제(폐수/화학물질) 준수, 에너지 최적화를 지원합니다.</p>
+                    <div class="domain-meta">
+                        <span class="meta-badge"><i class="bi bi-hdd-stack me-1"></i>1 서비스</span>
+                        <span class="meta-badge"><i class="bi bi-file-code me-1"></i>76 파일</span>
+                        <span class="meta-badge meta-badge-pass"><i class="bi bi-check-circle me-1"></i>85/85 PASS</span>
+                        <span class="meta-badge"><i class="bi bi-ethernet me-1"></i>:5183</span>
+                    </div>
                     <div class="services-list">
                         <span class="feature-tag feature-tag-purple">염색공정</span>
                         <span class="feature-tag feature-tag-purple">가공/후처리</span>
@@ -686,7 +893,7 @@
                         <span class="arch-item">TanStack Query</span>
                         <span class="arch-item">Zustand</span>
                         <span class="arch-item">Recharts</span>
-                        <span class="arch-item">19개 표준 페이지</span>
+                        <span class="arch-item">17~21개 표준 페이지</span>
                     </div>
                 </div>
                 <div class="arch-row">
@@ -1015,7 +1222,7 @@
             <div class="text-center mb-5 fade-in">
                 <span class="section-tag section-tag-primary" data-i18n="svc_tag">마이크로서비스 패턴</span>
                 <h2 class="section-title" data-i18n="svc_title">공통 마이크로서비스 패턴</h2>
-                <p class="section-desc" data-i18n="svc_desc">모든 산업 도메인이 동일한 서비스 패턴을 따릅니다. 8~10개의 마이크로서비스로 구성되며, 산업별 특화 서비스만 달라집니다.</p>
+                <p class="section-desc" data-i18n="svc_desc">모든 산업 도메인이 동일한 서비스 패턴을 따릅니다. 1~10개의 마이크로서비스로 구성되며(총 96개), 산업별 특화 서비스만 달라집니다.</p>
             </div>
 
             <div class="row g-3 fade-in">
@@ -1593,11 +1800,12 @@
                         <span style="color: var(--accent); font-weight: 300; font-size: 0.8rem; letter-spacing: 2px;">ELEVEN</span>
                     </div>
                     <p class="footer-desc" data-i18n="footer_sub">11개 제조 산업을 위한 AI 기반 차세대 제조실행시스템</p>
-                    <p class="small text-muted" data-i18n="footer_by">설계: Brian Lee / A3-AI 워킹그룹</p>
+                    <p class="small text-muted" data-i18n="footer_by">설계: Brian Lee / A3 Security AITF 워킹그룹</p>
                 </div>
                 <div class="col-lg-3 mb-4 mb-lg-0">
                     <h6 class="mb-3" data-i18n="footer_links">빠른 링크</h6>
                     <div class="d-flex flex-column gap-2">
+                        <a href="#project-status" data-i18n="footer_status">프로젝트 현황</a>
                         <a href="#domains" data-i18n="footer_domains">산업 도메인</a>
                         <a href="#architecture" data-i18n="footer_arch">아키텍처</a>
                         <a href="#techstack" data-i18n="footer_stack">기술 스택</a>
@@ -1622,7 +1830,7 @@
                 </div>
             </div>
             <div class="footer-copyright text-center mt-4">
-                &copy; 2025 A3 Security Co., Ltd. | AIMES 11개 산업 통합 플랫폼 | 모든 권리 보유.
+                &copy; 2026 A3 Security Co., Ltd. | AIMES 11개 산업 통합 플랫폼 | 모든 권리 보유.
             </div>
         </div>
     </footer>
