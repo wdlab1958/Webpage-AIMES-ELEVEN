@@ -2,7 +2,7 @@
 
 > **AI-based Manufacturing Execution System** for 11 Industrial Domains
 
-A3 Security Co., Ltd. | A3-AI Working Group | Designed by Brian Lee
+WDLAB@2023-2026 Co., Ltd. | WDLAB@2023-2026 Working Group | Designed by Brian Lee
 
 ---
 
@@ -301,4 +301,4 @@ Purdue Model 기반 네트워크 계층 분리:
 
 ## License
 
-&copy; 2025 A3 Security Co., Ltd. All rights reserved.
+&copy; 2025 WDLAB@2023-2026 Co., Ltd. All rights reserved.

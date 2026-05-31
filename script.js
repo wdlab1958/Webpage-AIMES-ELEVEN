@@ -316,7 +316,7 @@ const translations = {
         ov_domain_title: 'Domain Specialization',
         ov_domain_desc: 'Dedicated services and AI models tailored to each industry\'s regulations, processes, and quality standards.',
         ov_sec_title: 'Built-in Security',
-        ov_sec_desc: 'Zero Trust architecture applied to all industries based on A3 Security\'s OT/IT security expertise.',
+        ov_sec_desc: 'Zero Trust architecture applied to all industries based on WDLAB@2023-2026\'s OT/IT security expertise.',
 
         // Project Status
         ps_tag: 'PROJECT STATUS',
@@ -446,7 +446,7 @@ const translations = {
         // Security
         sec_tag: 'SECURITY',
         sec_title: 'Purdue Model Security Architecture',
-        sec_desc: 'Zero Trust architecture applied across all 11 industries based on A3 Security\'s OT/IT security expertise.',
+        sec_desc: 'Zero Trust architecture applied across all 11 industries based on WDLAB@2023-2026\'s OT/IT security expertise.',
         sec_purdue_title: 'Purdue Model Network Layers',
         sec_l5: 'Enterprise Network (Internet/External) — Enterprise Firewall + IDS/IPS',
         sec_l4: 'IT Zone — MES Server, AI Server, DB Server, Grafana, Vault, SIEM',
@@ -500,7 +500,7 @@ const translations = {
 
         // Footer
         footer_sub: 'AI-based next-gen MES for 11 manufacturing industries',
-        footer_by: 'Designed by Brian Lee / A3 Security AITF Working Group',
+        footer_by: 'Designed by Brian Lee / WDLAB@2023-2026 Working Group',
         footer_links: 'Quick Links',
         footer_status: 'Project Status',
         footer_domains: 'Industries',
@@ -668,7 +668,7 @@ function applyStaticTranslations(lang) {
         const copyright = document.querySelector('.footer-copyright');
         if (copyright) {
             if (!copyright._originalStaticText) copyright._originalStaticText = copyright.innerHTML;
-            copyright.innerHTML = '&copy; 2026 A3 Security Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.';
+            copyright.innerHTML = '&copy; 2026 WDLAB@2023-2026 Co., Ltd. | AIMES Eleven Industrial Platform | All rights reserved.';
         }
 
         // Stack card titles (need special handling because they contain icons)
